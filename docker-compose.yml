@@ -14,9 +14,6 @@ services:
       discovery.type: single-node
       xpack.security.enabled: 'false'
 
-    networks:
-      - elk
-
   logstash:
     volumes:
       - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro,Z
