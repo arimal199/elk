@@ -92,7 +92,11 @@ services:
   kibana:
     image: kibana:8.2.3
     environment:
+<<<<<<< HEAD
       server.name: localhost
+=======
+      SERVER_NAME: localhost
+>>>>>>> 1788c1c93cbc35eb41e081fb2fae2914925a5001
       ELASTICSEARCH_HOSTS: "http://elasticsearch1:9200","http://elasticsearch2:9200","http://elasticsearch3:9200"
     ports:
       - "5601:5601"
