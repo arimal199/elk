@@ -2,18 +2,77 @@ version: '3.7'
 
 services:
 
-  elasticsearch:
+  elasticsearch1:
     image: elasticsearch:8.2.3
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
-      - ./elasticsearch/data:/usr/share/elasticsearch/data:z
     ports:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx512m
-      discovery.type: single-node
+      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
       xpack.security.enabled: 'false'
+      xpack.ml.enabled: false
+      xpack.graph.enabled: false
+      xpack.watcher.enabled: false
+      cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
+      discovery.seed_hosts: elasticsearch2,elasticsearch3
+      node.name: elasticsearch1
+      cluster.name: es-cluster
+      bootstrap.memory_lock: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 30
+
+  elasticsearch2:
+    image: elasticsearch:8.2.3
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
+      xpack.security.enabled: 'false'
+      xpack.ml.enabled: false
+      xpack.graph.enabled: false
+      xpack.watcher.enabled: false
+      cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
+      discovery.seed_hosts: elasticsearch2,elasticsearch3
+      node.name: elasticsearch2
+      cluster.name: es-cluster
+      bootstrap.memory_lock: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 30
+
+  elasticsearch3:
+    image: elasticsearch:8.2.3
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    environment:
+      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
+      xpack.security.enabled: 'false'
+      xpack.ml.enabled: false
+      xpack.graph.enabled: false
+      xpack.watcher.enabled: false
+      cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
+      discovery.seed_hosts: elasticsearch2,elasticsearch3
+      node.name: elasticsearch3
+      cluster.name: es-cluster
+      bootstrap.memory_lock: 'true'
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200"]
+      interval: 30s
+      timeout: 10s
+      retries: 30
 
   logstash:
     image: logstash:8.2.3
@@ -32,8 +91,9 @@ services:
 
   kibana:
     image: kibana:8.2.3
-    volumes:
-      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro,Z
+    environment:
+      SERVER_NAME: localhost
+      ELASTICSEARCH_HOSTS: ["http://elasticsearch1:9200","http://elasticsearch2:9200","http://elasticsearch3:9200"]
     ports:
       - "5601:5601"
     depends_on:
