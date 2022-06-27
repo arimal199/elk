@@ -93,7 +93,7 @@ services:
     image: kibana:8.2.3
     environment:
       SERVER_NAME: localhost
-      ELASTICSEARCH_HOSTS: ["http://elasticsearch1:9200","http://elasticsearch2:9200","http://elasticsearch3:9200"]
+      ELASTICSEARCH_HOSTS: "http://elasticsearch1:9200","http://elasticsearch2:9200","http://elasticsearch3:9200"
     ports:
       - "5601:5601"
     depends_on:
