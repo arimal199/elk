@@ -25,6 +25,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 30
+    deploy:
+      placement:
+          constraints: [node.label == swarm]
 
   elasticsearch2:
     image: elasticsearch:8.2.3
@@ -49,6 +52,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 30
+    deploy:
+      placement:
+          constraints: [node.label == swarm2]
 
   elasticsearch3:
     image: elasticsearch:8.2.3
@@ -73,6 +79,9 @@ services:
       interval: 30s
       timeout: 10s
       retries: 30
+    deploy:
+      placement:
+          constraints: [node.label == swarm3]
 
   logstash:
     image: logstash:8.2.3
