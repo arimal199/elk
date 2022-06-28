@@ -27,7 +27,7 @@ services:
       retries: 30
     deploy:
       placement:
-          constraints: [node.label == swarm]
+          constraints: [node.hostname == swarm]
 
   elasticsearch2:
     image: elasticsearch:8.2.3
@@ -54,7 +54,7 @@ services:
       retries: 30
     deploy:
       placement:
-          constraints: [node.label == swarm2]
+          constraints: [node.hostname == swarm2]
 
   elasticsearch3:
     image: elasticsearch:8.2.3
@@ -81,7 +81,7 @@ services:
       retries: 30
     deploy:
       placement:
-          constraints: [node.label == swarm3]
+          constraints: [node.hostname == swarm3]
 
   logstash:
     image: logstash:8.2.3
