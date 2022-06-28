@@ -34,8 +34,8 @@ services:
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9201:9200"
+      - "9301:9300"
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
       xpack.security.enabled: 'false'
@@ -61,8 +61,8 @@ services:
     volumes:
       - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro,z
     ports:
-      - "9200:9200"
-      - "9300:9300"
+      - "9202:9200"
+      - "9302:9300"
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
       xpack.security.enabled: 'false'
