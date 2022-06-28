@@ -10,7 +10,7 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
       xpack.ml.enabled: 'false'
       xpack.graph.enabled: 'false'
@@ -37,7 +37,7 @@ services:
       - "9201:9200"
       - "9301:9300"
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
       xpack.ml.enabled: 'false'
       xpack.graph.enabled: 'false'
@@ -64,7 +64,7 @@ services:
       - "9202:9200"
       - "9302:9300"
     environment:
-      ES_JAVA_OPTS: -Xms512m -Xmx512m -Des.index.number_of_replicas=0 -Des.enforce.bootstrap.checks=true
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
       xpack.ml.enabled: 'false'
       xpack.graph.enabled: 'false'
