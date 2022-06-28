@@ -20,6 +20,7 @@ services:
       node.name: elasticsearch1
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
+      network.host: localhost
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
@@ -47,6 +48,7 @@ services:
       node.name: elasticsearch2
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
+      network.host: localhost
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
@@ -74,6 +76,7 @@ services:
       node.name: elasticsearch3
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
+      network.host: localhost
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
