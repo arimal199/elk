@@ -6,6 +6,7 @@ services:
     image: elasticsearch:8.2.3
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data:z
+      - ./elasticsearch/elasticsearch.service.d/override.conf:/etc/systemd/system/elasticsearch.service.d/override.conf:z
     ports:
       - "9200:9200"
       - "9300:9300"
@@ -31,6 +32,7 @@ services:
     image: elasticsearch:8.2.3
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data:z
+      - ./elasticsearch/elasticsearch.service.d/override.conf:/etc/systemd/system/elasticsearch.service.d/override.conf:z
     ports:
       - "9200"
       - "9300"
@@ -56,6 +58,7 @@ services:
     image: elasticsearch:8.2.3
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data:z
+      - ./elasticsearch/elasticsearch.service.d/override.conf:/etc/systemd/system/elasticsearch.service.d/override.conf:z
     ports:
       - "9200"
       - "9300"
