@@ -10,17 +10,14 @@ services:
       - "9200:9200"
       - "9300:9300"
     environment:
+    environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
-      xpack.ml.enabled: 'false'
-      xpack.graph.enabled: 'false'
-      xpack.watcher.enabled: 'false'
       cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
       discovery.seed_hosts: elasticsearch2,elasticsearch3
       node.name: elasticsearch1
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
-      network.host: localhost
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
@@ -28,27 +25,24 @@ services:
       retries: 30
     deploy:
       placement:
-          constraints: [node.hostname == swarm]
+          constraints: [node.hostname == swarm1]
 
   elasticsearch2:
     image: elasticsearch:8.2.3
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data:z
     ports:
-      - "9201:9200"
-      - "9301:9300"
+      - "9200"
+      - "9300"
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
-      xpack.ml.enabled: 'false'
-      xpack.graph.enabled: 'false'
-      xpack.watcher.enabled: 'false'
       cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
       discovery.seed_hosts: elasticsearch2,elasticsearch3
       node.name: elasticsearch2
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
-      network.host: localhost
+
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
@@ -63,20 +57,16 @@ services:
     volumes:
       - ./elasticsearch/data:/usr/share/elasticsearch/data:z
     ports:
-      - "9202:9200"
-      - "9302:9300"
+      - "9200"
+      - "9300"
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
       xpack.security.enabled: 'false'
-      xpack.ml.enabled: 'false'
-      xpack.graph.enabled: 'false'
-      xpack.watcher.enabled: 'false'
       cluster.initial_master_nodes: elasticsearch1,elasticsearch2,elasticsearch3
       discovery.seed_hosts: elasticsearch2,elasticsearch3
       node.name: elasticsearch3
       cluster.name: es-cluster
       bootstrap.memory_lock: 'true'
-      network.host: localhost
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:9200"]
       interval: 30s
